@@ -1,0 +1,57 @@
+{% extends "main/index.html" %}
+{% load static %}
+
+{% block form %}
+    <p>Witaj, {{ request.user.first_name }}!</p>
+    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit">Wyloguj</button>
+    </form>
+    <form action="{% url 'report' %}" method="get" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit">Raport</button>
+    </form>
+    
+    <h1 id="date"></h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="{{ form.date.id_for_label }}">Podaj datę:</label><br>
+            {{ form.date }}<br>
+        </div>
+        <div>
+            <label for="{{ form.start_time.id_for_label }}">Godzina rozpoczęcia:</label><br>
+            {{ form.start_time }}<br>
+        </div>
+        <div>
+            <label for="{{ form.end_time.id_for_label }}">Godzina zakończenia:</label><br>
+            {{ form.end_time }}<br>
+        </div>
+        <div>
+            <label for="{{ form.desc.id_for_label }}">Opis:</label><br>
+            {{ form.desc }}<br>
+        </div>
+        <div>
+            <label for="{{ form.type.id_for_label }}">Wybierz rodzaj pracy:</label><br>
+            {{ form.type }}<br>
+        </div>
+        <br>
+        <button type="submit">Zapisz</button>
+    </form><br><br>
+
+    <script>
+        var current_date = new Date();
+        var year = current_date.getFullYear();
+        var month = current_date.getMonth() + 1;
+    
+        var miesiace = ["STYCZEŃ", "LUTY", "MARZEC", "KWIECIEŃ", "MAJ", "CZERWIEC",
+                            "LIPIEC", "SIERPIEŃ", "WRZESIEŃ", "PAŹDZIERNIK", "LISTOPAD", "GRUDZIEŃ"];
+    
+        var miesiac = miesiace[current_date.getMonth()];
+        document.getElementById("date").innerHTML = miesiac + " " + year;
+
+        var dateField = document.getElementById('id_date');
+        var today = new Date().toISOString().split('T')[0];
+        dateField.value = today;
+    </script>
+{% endblock %}

@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', include('list.urls')),
     path('login/', LoginView.as_view(template_name='login/login.html'), name='login')
 ]

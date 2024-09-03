@@ -79,16 +79,10 @@ LOGIN_REDIRECT_URL = '/form/'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangodb',
-	'USER': 'django_user',
-        'PASSWORD': 'enderMAN2@',
-        'HOST': '192.168.7.8',
-        'PORT': '3306',
-    }
-}
+try:
+    from .db_settings import *
+except ImportError:
+    pass
 
 
 # Password validation

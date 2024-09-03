@@ -1,0 +1,5 @@
+*.pyc
+*~
+__pycache__x
+.DS_Store
+db_settings.py
